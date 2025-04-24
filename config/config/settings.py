@@ -1,4 +1,5 @@
 # config/config/settings.py — configuración para entorno de producción Render
+
 from pathlib import Path
 from decouple import config, Csv
 import dj_database_url
