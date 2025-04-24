@@ -1,6 +1,6 @@
-# config/views.py — vista básica para la raíz
+# config/views.py
 
 from django.shortcuts import render
 
-def hola_mundo(request):
+def index(request):
     return render(request, 'index.html')
