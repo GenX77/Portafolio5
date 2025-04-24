@@ -11,7 +11,8 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'unsafe-default-key')
-DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1')
+#DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1')
+DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv())
 
 INSTALLED_APPS = [
