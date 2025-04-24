@@ -25,6 +25,8 @@ INSTALLED_APPS = [
     'agenda.apps.AgendaConfig',
 ]
 
+STATIC_URL = '/static/'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
