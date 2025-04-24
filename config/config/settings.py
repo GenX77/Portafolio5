@@ -1,16 +1,14 @@
 # config/config/settings.py — configuración para entorno de producción Render
 
 from pathlib import Path
-import os
-from dotenv import load_dotenv
+from decouple import config, Csv
 import dj_database_url
-
-load_dotenv()
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY', 'unsafe-default-key')
-DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1')
+SECRET_KEY = config('SECRET_KEY', default='unsafe-default-key')
+DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv())
 
 INSTALLED_APPS = [
