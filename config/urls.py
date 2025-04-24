@@ -1,12 +1,14 @@
 # config/urls.py
-
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from config import views as config_views  # Importamos la vista principal
 
 urlpatterns = [
-    path('', views.index, name='index'),  # Ruta principal que carga la vista index
     path('admin/', admin.site.urls),
-    path('usuarios/', include(('gestion_usuarios.urls', 'gestion_usuarios'), namespace='gestion_usuarios')),
-    path('usu/', include(('gestion_usu.urls', 'gestion_usu'), namespace='gestion_usu')),
+    path('agenda/', include('agenda.urls', namespace='agenda')),
+    path('', config_views.index, name='home'),  # Ruta raíz que carga index.html
+    path('gestion_usuarios/', include('gestion_usuarios.urls')),
+    path('gestion_usu/', include('gestion_usu.urls')),
+    path('agenda/', include('agenda.urls')), 
+    # Puedes agregar otras apps aquí si lo necesitas
 ]
