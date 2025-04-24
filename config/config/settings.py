@@ -1,4 +1,4 @@
-# config/config/settings.py.render (configuración de settings.py para funcionar en el hosting de Render)
+# config/config/settings.py — configuración para entorno de producción Render
 
 from pathlib import Path
 import os
@@ -9,9 +9,9 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY', 'unsafe-default-key')  # Agregar default por si falta
+SECRET_KEY = os.getenv('SECRET_KEY', 'unsafe-default-key')
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1')
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -22,12 +22,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'gestion_usuarios',
     'gestion_usu',
-    'agenda.apps.AgendaConfig',  # <--- Especificar AppConfig es mejor práctica
+    'agenda.apps.AgendaConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # para servir archivos estáticos
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -41,7 +41,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'config' / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],  # Asegúrate de mover tus plantillas aquí
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
