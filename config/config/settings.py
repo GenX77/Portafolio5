@@ -1,4 +1,4 @@
-# config/config/settings.py.render
+# config/config/settings.py.render (configuración de settings.py para funcionar en el hosting de Render)
 
 from pathlib import Path
 import os
@@ -9,20 +9,20 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY', 'unsafe-default-key')  # Agregar default por si falta
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1')
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 INSTALLED_APPS = [
-    'gestion_usuarios',
-    'gestion_usu',
-    'agenda',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'gestion_usuarios',
+    'gestion_usu',
+    'agenda.apps.AgendaConfig',  # <--- Especificar AppConfig es mejor práctica
 ]
 
 MIDDLEWARE = [
@@ -56,7 +56,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Base de datos en Render (PostgreSQL)
 DATABASES = {
     'default': dj_database_url.config(conn_max_age=600)
 }
