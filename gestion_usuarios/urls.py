@@ -1,5 +1,9 @@
+# gestion_usuarios/urls.py
+
 from django.urls import path
 from . import views
+
+app_name = 'gestion_usuarios'  # <-- ¡ESTA LÍNEA ES CRUCIAL!
 
 urlpatterns = [
     path('', views.index, name='index'),
