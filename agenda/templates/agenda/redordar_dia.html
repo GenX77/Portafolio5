@@ -1,0 +1,32 @@
+<!-- agenda/templates/agenda/recordar_dia.html -->
+
+{% extends 'agenda/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">📅 Recordar qué hice en otro día</h2>
+
+    <form method="get" class="mb-4">
+        <div class="input-group">
+            <input type="date" name="fecha" class="form-control" value="{{ fecha_seleccionada }}">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </form>
+
+    {% if recordatorios %}
+        <div class="list-group">
+            {% for rec in recordatorios %}
+                <div class="list-group-item {% if rec.hecho %}list-group-item-success{% else %}list-group-item-warning{% endif %}">
+                    <div class="d-flex justify-content-between">
+                        <strong>{{ rec.titulo }}</strong>
+                        <small>{{ rec.fecha|date:"d/m/Y" }} - {{ rec.hora }}</small>
+                    </div>
+                    <p>{{ rec.descripcion }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% elif fecha_seleccionada %}
+        <div class="alert alert-info">No se encontraron tareas para esta fecha.</div>
+    {% endif %}
+</div>
+{% endblock %}

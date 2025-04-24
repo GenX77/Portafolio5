@@ -1,0 +1,69 @@
+<!-- agenda/templates/agenda/inicio.html -->
+
+{% extends "gestion_usu/base.html" %}
+
+{% block title %}Agenda - RecuerdaMe{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Agenda de Recordatorios 🧠</h1>
+    <p class="fs-5 text-center">Fecha y hora actual: <span id="reloj"></span></p>
+
+    {% if proximos %}
+    <div class="alert alert-warning d-flex align-items-center justify-content-center mt-4" role="alert">
+        🔔 Tienes recordatorios en menos de 4 horas
+        <audio autoplay>
+            <source src="https://notificationsounds.com/notification-sounds/light-559/download/mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    {% endif %}
+
+    <div class="d-grid gap-3 mt-4">
+        {% if hay_vencidos %}
+        <a href="{% url 'agenda:recordatorios_vencidos' %}" class="btn btn-danger">
+            ⚠️ Ver recordatorios vencidos (no realizados)
+        </a>
+        {% endif %}
+
+        {% if hay_hoy %}
+        <a href="{% url 'agenda:recordatorios_hoy' %}" class="btn btn-info">
+            📆 Ver recordatorios de hoy
+        </a>
+        {% endif %}
+
+        <a href="{% url 'agenda:recordar_dia' %}?fecha={{ ayer|date:"Y-m-d" }}" class="btn btn-secondary">
+            🧠 Recordar lo que hice ayer
+        </a>
+
+        <a href="{% url 'agenda:agregar_recordatorio' %}" class="btn btn-success">
+            ➕ Agregar un nuevo recordatorio
+        </a>
+    </div>
+
+    {% if tareas_12h %}
+    <div class="mt-5">
+        <h4 class="mb-3">📌 Próximas tareas en 12 horas</h4>
+        <ul class="list-group">
+            {% for t in tareas_12h %}
+            <li class="list-group-item d-flex justify-content-between align-items-center {% if not t.hecho %}list-group-item-warning{% else %}list-group-item-success{% endif %}">
+                <div>
+                    <strong>{{ t.titulo }}</strong><br>
+                    <small>{{ t.fecha|date:"d/m/Y" }} - {{ t.hora|time:"H:i" }}</small>
+                </div>
+                <span>{% if t.hecho %}✅ Hecho{% else %}⏳ Pendiente{% endif %}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function actualizarReloj() {
+    const ahora = new Date();
+    document.getElementById('reloj').textContent = ahora.toLocaleString('es-ES');
+}
+setInterval(actualizarReloj, 1000);
+actualizarReloj();
+</script>
+{% endblock %}

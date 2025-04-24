@@ -1,0 +1,31 @@
+<!-- agenda/templates/agenda/recordatorios_hoy.html -->
+
+{% extends 'agenda/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">📅 Recordatorios de Hoy</h2>
+
+    {% if recordatorios %}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for recordatorio in recordatorios %}
+                <div class="col">
+                    <div class="card border-info shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ recordatorio.titulo }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ recordatorio.fecha|date:"d M, Y" }} - {{ recordatorio.hora|time:"H:i" }}</h6>
+                            <p class="card-text">{{ recordatorio.descripcion }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            No tienes recordatorios para hoy.
+        </div>
+    {% endif %}
+
+    <a href="{% url 'inicio' %}" class="btn btn-secondary mt-4">⬅️ Volver al inicio</a>
+</div>
+{% endblock %}
