@@ -47,7 +47,7 @@
 │   │   ├── __init__.py
 │   │   ├── asgi.py
 │   │   ├── settings.py
-│   │   ├── settings.py.render
+│   │   ├── settings.py.sqlite
 │   │   ├── templates/
 │   │   │   ├── index.html
 │   │   ├── urls.py
