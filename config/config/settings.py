@@ -1,15 +1,17 @@
-# config/config/settings.py — configuración para entorno de producción Render
+# config/config/settings.py — configuración adaptativa para entorno local y producción (Render)
 
 from pathlib import Path
-from decouple import config, Csv
+from decouple import config
 import dj_database_url
 import os
+import socket
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = config('SECRET_KEY', default='unsafe-default-key')
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = ['render-deply-tutorial-django-code.onrender.com', 'localhost', '127.0.0.1']
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')], default='127.0.0.1,localhost')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -22,8 +24,6 @@ INSTALLED_APPS = [
     'gestion_usu',
     'agenda.apps.AgendaConfig',
 ]
-
-STATIC_URL = '/static/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -41,7 +41,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Asegúrate de mover tus plantillas aquí
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -56,9 +56,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600)
-}
+# Detectar si estamos en Render por nombre de host
+IS_RENDER = socket.gethostname().startswith('render')
+
+if IS_RENDER:
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},

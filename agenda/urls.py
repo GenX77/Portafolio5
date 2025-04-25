@@ -3,7 +3,7 @@
 from django.urls import path
 from . import views
 
-app_name = 'agenda'  # Esto permite usar el namespace 'agenda'
+app_name = 'agenda'
 
 urlpatterns = [
     path('', views.inicio, name='inicio_agenda'),

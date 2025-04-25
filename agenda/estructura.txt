@@ -1,0 +1,30 @@
+├── README.md
+├── __init__.py
+├── admin.py
+├── apps.py
+├── arbol.py
+├── estructura.txt
+├── forms.py
+├── migrations/
+│   ├── 0001_initial.py
+│   ├── 0002_recordatorio_hecho.py
+│   ├── __init__.py
+├── models.py
+├── palabras_prohibidas.txt
+├── static/
+│   ├── agenda/
+│   │   ├── alerta.mp3
+├── templates/
+│   ├── agenda/
+│   │   ├── agregar_recordatorio.html
+│   │   ├── base.html
+│   │   ├── editar_recordatorio.html
+│   │   ├── inicio.html
+│   │   ├── listar_recordatorios.html
+│   │   ├── recordar_dia.html
+│   │   ├── recordatorios_hoy.html
+│   │   ├── redordar_dia.html
+│   │   ├── tareas_atrasadas.html
+├── tests.py
+├── urls.py
+├── views.py
