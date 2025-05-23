@@ -1,4 +1,0 @@
-1|Carlos|755888000|carlos.m@gmail.com
-4|Eduardo|755511541|eduardo@gmail.com
-5|pedro|5151551511|pedro.p@gmail.com
-6|pepito||

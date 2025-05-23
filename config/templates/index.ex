@@ -1,3 +1,4 @@
+<!-- Ubicación: config/templates/index.html -->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -130,12 +131,12 @@
                             Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'gestion_usu:index' %}"><i
-                                class="bi bi-file-earmark-text me-1"></i> Datos TXT</a>
+                        <a class="nav-link" href="{% url 'gestion_usu:index' %}"><i class="bi bi-file-earmark-text me-1"></i>
+                            Gestión de datos TXT</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'listar_contactos' %}"><i class="bi bi-database me-1"></i>
-                            Gestión DB</a>
+                        <a class="nav-link" href="{% url 'agenda:inicio_agenda' %}"><i class="bi bi-calendar-check me-1"></i>
+                            Agenda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="mailto:gendersonc@gmail.com"><i class="bi bi-envelope me-1"></i>
@@ -149,8 +150,8 @@
     <div class="container-fluid hero">
         <div class="hero-content">
             <h1 class="display-1 fw-bold">¡Hola Mundo!</h1>
-            <p class="lead fs-3">Bienvenido a mis aplicaciones en Python con Django. Con fines unicamente educativos.</p>
-            <a href="#portfolio" class="btn btn-primary btn-lg"><i class="bi bi-eye me-2"></i> Ver Portafolio</a>
+            <p class="lead fs-3">Bienvenido a mis aplicaciones en Python con Django. Con fines únicamente educativos.</p>
+            <a href="#portfolio" class="btn btn-primary btn-lg"><i class="bi bi-gear-fill me-2"></i> En construcción</a>
         </div>
     </div>
 
@@ -160,18 +161,18 @@
             <p class="lead text-center">Mis aplicaciones de prueba.</p>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <h3>Gestión TXT</h3>
-                    <p>Lee y escribe en archivos de texto plano.</p>
+                    <h3>Gestión de datos TXT</h3>
+                    <p>Lee y escribe en archivos de texto plano y lo utiliza a manera de base de datos.</p>
                     <a href="{% url 'gestion_usu:index' %}" class="btn btn-sm btn-outline-light"><i
                             class="bi bi-link-45deg me-1"></i> Ver Proyecto</a>
                 </div>
                 <div class="portfolio-item">
-                    <h3>Gestión DB</h3>
-                    <p>Guarda la información de contactos en una base de datos SQLite.</p>
-                    <a href="{% url 'listar_contactos' %}" class="btn btn-sm btn-outline-light"><i
+                    <h3>Agenda en base de datos SQL</h3>
+                    <p>Organiza tus tareas y actividades, te ayuda a recodar tareas que tengas que realizar y controlar cuales tienes pendientes, además puedes consultar que tareas hiciste en días pasados.</p>
+                    <a href="{% url 'agenda:inicio_agenda' %}" class="btn btn-sm btn-outline-light"><i
                             class="bi bi-link-45deg me-1"></i> Ver Proyecto</a>
                 </div>
-                </div>
+            </div>
         </div>
     </section>
 
